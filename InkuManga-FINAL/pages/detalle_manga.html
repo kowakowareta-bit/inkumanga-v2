@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InkuManga - Detalle del Manga</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://p4.wallpaperbetter.com/wallpaper/518/375/797/manga-anime-mix-up-hd-wallpaper-preview.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #00E5FF;
+    padding-bottom: 60px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .header-section {
+    display: flex;
+    gap: 30px;
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 18px;
+    backdrop-filter: blur(14px);
+    border: 1px solid #00E5FF55;
+    box-shadow: 0 0 25px #00E5FF33;
+  }
+
+  .cover {
+    width: 260px;
+    height: 360px;
+    background: #1A0033;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  h1 {
+    margin: 0;
+    color: #26F7FF;
+    font-size: 36px;
+  }
+
+  .genres span {
+    padding: 6px 14px;
+    background: #120033;
+    border: 1px solid #26F7FF55;
+    border-radius: 50px;
+    font-size: 14px;
+    margin-right: 8px;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+  .buttons button {
+    padding: 12px 20px;
+    background: #00E5FF;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: 0.25s;
+    color: #000;
+  }
+  .buttons button:hover {
+    background: #26F7FF;
+    transform: scale(1.05);
+  }
+
+  .sinopsis {
+    margin-top: 25px;
+    background: rgba(0,0,0,0.55);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #00E5FF33;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  .chapters {
+    margin-top: 40px;
+  }
+  .chapter-item {
+    background: rgba(0,0,0,0.55);
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #00E5FF33;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+  .chapter-item:hover {
+    background: rgba(0,0,0,0.7);
+    transform: scale(1.02);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header-section">
+    <div class="cover" style="background-image:url('https://cdn.myanimelist.net/images/manga/3/179882.jpg');"></div>
+
+    <div>
+      <h1>Título del Manga</h1>
+      <p style="color:#8ee8ff; margin-top:6px;">Por: Autor del Manga</p>
+
+      <div class="genres">
+        <span>Acción</span>
+        <span>Fantasía</span>
+        <span>Shonen</span>
+      </div>
+
+      <div class="buttons">
+        <button>Leer</button>
+        <button>Seguir</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sinopsis">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique nibh nec urna fermentum placerat. Suspendisse potenti. Fusce nec leo non tortor suscipit blandit.
+  </div>
+
+  <div class="chapters">
+    <h2 style="color:#26F7FF; margin-bottom:15px;">Capítulos</h2>
+
+    <div class="chapter-item">
+      <span>Capítulo 10 - El despertar</span>
+      <span style="color:#8ee8ff;">Hace 3h</span>
+    </div>
+
+    <div class="chapter-item">
+      <span>Capítulo 9 - Sombras</span>
+      <span style="color:#8ee8ff;">Hace 1d</span>
+    </div>
+
+    <div class="chapter-item">
+      <span>Capítulo 8 - El ritual</span>
+      <span style="color:#8ee8ff;">Hace 2d</span>
+    </div>
+
+    <div class="chapter-item">
+      <span>Capítulo 7 - Memorias</span>
+      <span style="color:#8ee8ff;">Hace 4d</span>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InkuManga - Lector</title>
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://p4.wallpaperbetter.com/wallpaper/518/375/797/manga-anime-mix-up-hd-wallpaper-preview.jpg'); background-size: cover; background-position: center;
+    font-family: 'Arial', sans-serif;
+    color: #00E5FF;
+  }
+
+  .top-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 12px 20px;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid #00E5FF55;
+  }
+
+  .top-bar button {
+    padding: 10px 16px;
+    background: #00E5FF;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000;
+    transition: 0.25s;
+  }
+
+  .top-bar button:hover {
+    background: #26F7FF;
+    transform: scale(1.05);
+  }
+
+  .chapter-images {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 60px;
+  }
+
+  .chapter-images img {
+    width: 100%;
+    max-width: 750px;
+    border-radius: 6px;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 12px 12px;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid #00E5FF55;
+    border-radius: 12px;
+    z-index: 150;
+}
+
+  .bottom-nav button {
+    padding: 10px 16px;
+    background: #00E5FF;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000;
+    transition: 0.25s;
+  }
+
+  .bottom-nav button:hover {
+    background: #26F7FF;
+    transform: scale(1.05);
+  }
+
+  /* Auto-hide UI */
+  .top-bar, .bottom-nav { opacity: 1; transition: opacity 0.4s; }
+  .hidden-ui { opacity: 0; }
+  /* Auto-hide translator */
+  #langSelector.hidden-ui { opacity:0; }
+  /* Custom scroll like other pages */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A001A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00E5FF;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #26F7FF;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <button id="backBtn">⬅ Volver</button>
+
+  <div style="text-align:center; flex:1;">
+    <div id="mangaTitle" style="font-size:18px; color:#26F7FF; font-weight:bold;">Nombre del Manga</div>
+    <button id="chapterSelectorBtn" style="margin-top:4px; padding:6px 10px; background:#1A0033; color:#26F7FF; border-radius:8px; border:1px solid #26F7FF55; cursor:pointer;">Capítulo 10 ⌵</button>
+  </div>
+
+  <div style="display:flex; gap:10px;">
+    <button id="zoomIn">＋</button>
+    <button id="zoomOut">－</button>
+    <button id="shareBtn">⤴ Compartir</button>
+    <button id="settingsBtn">⚙️</button>
+  </div>
+</div>
+
+<div class="chapter-images">
+  <img src="https://i.ibb.co/z6D0qR4/sample1.jpg" />
+  <img src="https://i.ibb.co/wd9s7nj/sample2.jpg" />
+  <img src="https://i.ibb.co/x3Kq0zN/sample3.jpg" />
+</div>
+
+<div class="bottom-nav" style="position:fixed; right:20px; top:50%; transform:translateY(-50%); width:auto; height:auto; flex-direction:column; padding:10px; gap:10px; border-radius:12px;">
+  <button style="width:120px;">⬅ Anterior</button>
+  <button style="width:120px;">Siguiente ➡</button>
+</div>
+
+<!-- Comentarios -->
+<div id="commentsSection" style="max-width:750px;margin:40px auto;padding:20px;background:rgba(0,0,0,0.6);border:1px solid #00E5FF55;border-radius:12px;">
+  <h3 style="color:#26F7FF;margin-bottom:15px;">Comentarios</h3>
+  <div id="commentsList" style="max-height:200px;overflow-y:auto;margin-bottom:15px;"></div>
+  <textarea id="commentInput" placeholder="Escribe un comentario..." style="width:100%;padding:10px;background:#1A0033;color:#26F7FF;border-radius:8px;border:1px solid #26F7FF55;"></textarea>
+  <button onclick="addComment()" style="margin-top:10px;padding:10px 20px;background:#00E5FF;color:#000;font-weight:bold;border:none;border-radius:8px;cursor:pointer;">Enviar</button>
+</div>
+
+<!-- Indicador de imagen -->
+<div id="imageIndicator" style="position:fixed;left:20px;bottom:20px;background:rgba(0,0,0,0.75);padding:10px 15px;border-radius:8px;border:1px solid #00E5FF55;color:#26F7FF;font-weight:bold;z-index:200;">
+  Imagen <span id="currentImg">1</span> / <span id="totalImg">3</span>
+</div>
+
+<!-- Idioma -->
+<div id="langSelector" style="position:fixed;left:20px;top:80px;background:rgba(0,0,0,0.55);padding:12px 14px;border-radius:12px;border:1px solid #00E5FF33;z-index:200;backdrop-filter:blur(6px);box-shadow:0 0 12px #00E5FF33;transition:opacity 0.4s;">
+  <select id="language" style="background:#0A0020;color:#26F7FF;border-radius:10px;padding:8px 14px;border:1px solid #26F7FF55;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 0 10px #00E5FF33;">
+    <option value="es">🇪🇸 Español</option>
+    <option value="en">🇬🇧 English</option>
+  </select>
+</div>
+
+<script>
+// SINGLE uiTimeout FIX
+let uiTimeout;
+function showUI(){
+  const top = document.querySelector('.top-bar');
+  const bottom = document.querySelector('.bottom-nav');
+  const lang = document.getElementById('langSelector');
+
+  if(top) top.classList.remove('hidden-ui');
+  if(bottom) bottom.classList.remove('hidden-ui');
+  if(lang) lang.classList.remove('hidden-ui');
+
+  clearTimeout(uiTimeout);
+  uiTimeout = setTimeout(()=>{
+    if(top) top.classList.add('hidden-ui');
+    if(bottom) bottom.classList.add('hidden-ui');
+    if(lang) lang.classList.add('hidden-ui');
+  },800);
+}
+window.onload = showUI;
+document.onmousemove = showUI;
+
+// Toggle settings panel
+const settingsBtn=document.getElementById('settingsBtn');
+const panel=document.getElementById('settingsPanel');
+settingsBtn.onclick=()=>{
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+};
+
+// Reading mode
+const readMode=document.getElementById('readMode');
+readMode.onchange=()=>{
+  const imgs=document.querySelector('.chapter-images');
+  if(readMode.value==='horizontal'){
+    imgs.style.flexDirection='row';
+    imgs.style.flexWrap='nowrap';
+    imgs.style.overflowX='scroll';
+  } else {
+    imgs.style.flexDirection='column';
+    imgs.style.overflowX='visible';
+  }
+};
+
+// Resolution change
+const res=document.getElementById('resolution');
+res.onchange=()=>{
+  document.querySelectorAll('.chapter-images img').forEach(img=>{
+    img.style.maxWidth=res.value+'px';
+  });
+};
+</script>
+
+<div id="settingsPanel" style="position:fixed; top:70px; right:20px; background:rgba(0,0,0,0.85); border:1px solid #00E5FF55; padding:20px; border-radius:12px; width:240px; backdrop-filter:blur(10px); display:none; z-index:200;">
+  <h3 style="margin:0 0 10px 0; color:#26F7FF; font-size:18px;">Ajustes</h3>
+  <label style="color:#8ee8ff; font-size:14px;">Modo de lectura</label>
+  <select id="readMode" style="width:100%; padding:8px; margin-bottom:12px; background:#1A0033; color:#26F7FF; border-radius:8px; border:1px solid #26F7FF55;">
+    <option value="vertical">Vertical</option>
+    <option value="horizontal">Horizontal</option>
+  </select>
+  <label style="color:#8ee8ff; font-size:14px;">Resolución</label>
+  <select id="resolution" style="width:100%; padding:8px; background:#1A0033; color:#26F7FF; border-radius:8px; border:1px solid #26F7FF55;">
+    <option value="750">Alta (750px)</option>
+    <option value="600">Media (600px)</option>
+    <option value="450">Baja (450px)</option>
+  </select>
+</div>
+
+</body>
+</html>
