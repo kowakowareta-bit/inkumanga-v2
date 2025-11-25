@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InkuManga - Subir Manga</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://p4.wallpaperbetter.com/wallpaper/518/375/797/manga-anime-mix-up-hd-wallpaper-preview.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    color: #00E5FF;
+  }
+
+  .panel {
+    width: 520px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(20px);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid #00E5FF55;
+    box-shadow: 0 0 25px #00E5FF55;
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  h2 {
+    text-align: center;
+    color: #26F7FF;
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+
+  label {
+    font-size: 16px;
+    color: #8ee8ff;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    background: #1A0033cc;
+    border: 2px solid #00E5FF55;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #00E5FF;
+  }
+
+  textarea {
+    height: 130px;
+    resize: none;
+  }
+
+  .file-input {
+    background: #1A0033cc;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px dashed #00E5FF55;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #00E5FF;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+
+  button:hover {
+    background: #26F7FF;
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="panel">
+  <h2>Subir un Nuevo Manga</h2>
+
+  <label>Título del Manga</label>
+  <input type="text" placeholder="Ej: Shadows of Eternity" />
+
+  <label>Autor</label>
+  <input type="text" placeholder="Tu nombre o alias" />
+
+  <label>Género</label>
+  <select>
+    <option>Shonen</option>
+    <option>Seinen</option>
+    <option>Romance</option>
+    <option>Fantasía</option>
+    <option>Comedia</option>
+    <option>Acción</option>
+  </select>
+
+  <label>Portada del Manga</label>
+  <div class="file-input">Haz clic para seleccionar la portada</div>
+
+  <label>Sinopsis</label>
+  <textarea placeholder="Descripción del manga..."></textarea>
+
+  <button>Publicar Manga</button>
+</div>
+
+</body>
+</html>
