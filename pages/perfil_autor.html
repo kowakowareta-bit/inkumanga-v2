@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>InkuManga - Perfil del Autor</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://p4.wallpaperbetter.com/wallpaper/518/375/797/manga-anime-mix-up-hd-wallpaper-preview.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #00E5FF;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .profile-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 25px;
+    background: rgba(0,0,0,0.55);
+    padding: 25px;
+    border-radius: 18px;
+    backdrop-filter: blur(14px);
+    border: 1px solid #00E5FF55;
+    box-shadow: 0 0 25px #00E5FF33;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #1A0033;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .profile-info h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #26F7FF;
+  }
+
+  .profile-info textarea {
+    width: 100%;
+    padding: 10px;
+    background: #1A0033;
+    color: #26F7FF;
+    border-radius: 8px;
+    border: 1px solid #26F7FF55;
+    resize: none;
+    font-size: 14px;
+  }
+
+  .save-btn {
+    margin-top: 10px;
+    padding: 10px 18px;
+    background: #00E5FF;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000;
+    transition: 0.25s;
+  }
+  .save-btn:hover {
+    background: #26F7FF;
+    transform: scale(1.05);
+  }
+
+  .follow-btn {
+    margin-top: 12px;
+    padding: 10px 18px;
+    background: #00E5FF;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #000;
+    transition: 0.25s;
+  }
+  .follow-btn:hover {
+    background: #26F7FF;
+    transform: scale(1.05);
+  }
+
+  .author-mangas {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+    gap: 20px;
+  }
+
+  .manga-card {
+    background: rgba(0,0,0,0.55);
+    border-radius: 12px;
+    border: 1px solid #00E5FF33;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+  .manga-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px #00E5FF33;
+  }
+  .manga-card img {
+    width: 100%;
+    display: block;
+  }
+  .manga-card h3 {
+    margin: 10px;
+    font-size: 16px;
+    color: #26F7FF;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="profile-header">
+    <div class="avatar" style="background-image:url('https://i.ibb.co/YZrQ7k0/sample-avatar.jpg');"></div>
+    <div class="profile-info">
+      <h1>Nombre del Autor</h1>
+      <textarea id="bioInput">Biografía breve del autor, describiendo sus obras, estilo y trayectoria en el mundo del manga.</textarea>
+      <button class="save-btn" onclick="saveBio()">Guardar</button>
+      <button class="follow-btn">Seguir</button>
+    </div>
+  </div>
+
+  <div class="author-mangas">
+    <div class="manga-card">
+      <img src="https://i.ibb.co/z6D0qR4/sample1.jpg" />
+      <h3>Manga 1</h3>
+    </div>
+    <div class="manga-card">
+      <img src="https://i.ibb.co/wd9s7nj/sample2.jpg" />
+      <h3>Manga 2</h3>
+    </div>
+    <div class="manga-card">
+      <img src="https://i.ibb.co/x3Kq0zN/sample3.jpg" />
+      <h3>Manga 3</h3>
+    </div>
+    <div class="manga-card">
+      <img src="https://i.ibb.co/rt5Nf9G/sample4.jpg" />
+      <h3>Manga 4</h3>
+    </div>
+  </div>
+</div>
+
+<script>
+function saveBio() {
+  const bio = document.getElementById('bioInput').value;
+  alert('Biografía guardada:\n' + bio);
+  // Aquí se podría integrar Firebase para guardar la bio del autor
+}
+</script>
+</body>
+</html>
